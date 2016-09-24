@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 23, 2016 11:52:16 AM by Hibernate Tools 5.1.0.Beta1 -->
+<hibernate-mapping>
+    <class name="edu.mum.cs544.domain.Item" table="item" catalog="food_delivery" optimistic-lock="version">
+        <id name="itemId" type="java.lang.Integer">
+            <column name="itemID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="business" class="edu.mum.cs544.domain.Business" fetch="select">
+            <column name="businessID" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" />
+        </property>
+        <set name="orderGroups" table="order_group" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="itemID" />
+            </key>
+            <one-to-many class="edu.mum.cs544.domain.OrderGroup" />
+        </set>
+    </class>
+</hibernate-mapping>

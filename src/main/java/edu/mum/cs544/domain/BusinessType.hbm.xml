@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 23, 2016 11:52:16 AM by Hibernate Tools 5.1.0.Beta1 -->
+<hibernate-mapping>
+    <class name="edu.mum.cs544.domain.BusinessType" table="business_type" catalog="food_delivery" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="type" type="string">
+            <column name="type" length="200" unique="true" />
+        </property>
+        <set name="businesses" table="business" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="businessTypeID" />
+            </key>
+            <one-to-many class="edu.mum.cs544.domain.Business" />
+        </set>
+    </class>
+</hibernate-mapping>
